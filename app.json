@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "TBSHMK",
+    "slug": "TBSHMK",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "primaryColor": "#ff5dc8",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "tabyshmak.app.mobile",
+      "buildNumber": "1.0.0",
+      "supportsTablet": true,
+      "icon": "./assets/icon-ios.png"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFF"
+      },
+      "versionCode": 2,
+      "permissions": [ ],
+      "package": "tabyshmak.app.mobile"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

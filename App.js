@@ -41,7 +41,6 @@ const client = new ApolloClient({
 });
 
 export default function App () {
-  const [searchText, setSearchText] = useState("");
   const [loadingCache, setLoadingCache] = useState(true);
   useEffect(() => {
     persistCache({
@@ -53,6 +52,19 @@ export default function App () {
   if (loadingCache) {
     return <AppLoading />;
   }
+  const HeaderComp = props => {
+    console.log({ props });
+    const [searchText, setSearchText] = useState("");
+    return (
+      <SearchBar
+        inputContainerStyle={{ flex: 1, backgroundColor: "lightgray", }}
+        containerStyle={{ height: 55, flex: 1, borderBottomColor: "white", backgroundColor: "white", borderTopColor: "white" }}
+        placeholder="Программист"
+        value={searchText}
+        onChangeText={setSearchText} />
+    );
+  };
+
   const stackNavigator = () => {
     return (
         <Stack.Navigator style={{ backgroundColor: "red" }} initialRouteName="Home" screenOptions={screenOptions}>
@@ -60,15 +72,18 @@ export default function App () {
             name="Home"
             component={HomeScreen}
             options={{
+              haha: "yes",
               // eslint-disable-next-line react/display-name
               headerTitle: props => {
                 console.log({ props });
+                const [searchText, setSearchText] = useState("");
                 return (
                   <SearchBar
                     inputContainerStyle={{ flex: 1, backgroundColor: "lightgray", }}
                     containerStyle={{ height: 55, flex: 1, borderBottomColor: "white", backgroundColor: "white", borderTopColor: "white" }}
                     placeholder="Программист"
                     value={searchText}
+                    onSubmitEditing={() => console.log("Search softkey pressed!")}
                     onChangeText={setSearchText} />
                 );
               }
@@ -99,7 +114,7 @@ export default function App () {
             tabBar name="Home"
             component={stackNavigator}
             options={{
-              tabBarLabel: "Home",
+              tabBarLabel: "Главная",
               tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons name="home" color={color} size={size} />
               ),

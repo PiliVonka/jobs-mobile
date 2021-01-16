@@ -39,11 +39,11 @@ export default ({ route }) => {
   return (
     <View style={styles.jobPage}>
      <ScrollView style={styles.scrollView}>
-      <Text style={styles.header}> {title} </Text>
-      <Text style={styles.subheader}> {jobDate} </Text>
-      <Text style={styles.item}> {description} </Text>
-      <Text> {phone} </Text>
-      <Text> {location} </Text>
+      <Text selectable={true} style={styles.header}> {title} </Text>
+      <Text selectable={true} style={styles.subheader}> {jobDate} </Text>
+      <Text selectable={true} style={styles.item}> {description} </Text>
+      <Text selectable={true}> {phone} </Text>
+      <Text selectable={true}> {location} </Text>
       </ScrollView>
     </View>
   );

@@ -35,12 +35,13 @@ export default ({ route }) => {
     );
   }
 
-  const { title, jobDate, description, phone, location } = data.job;
+  const { title, created, description, phone, location } = data.job;
+  console.log({ title, created });
   return (
     <View style={styles.jobPage}>
      <ScrollView style={styles.scrollView}>
       <Text selectable={true} style={styles.header}> {title} </Text>
-      <Text selectable={true} style={styles.subheader}> {jobDate} </Text>
+      <Text selectable={true} style={styles.subheader}> {new Date(parseInt(created)).toLocaleString("ru-RU")} </Text>
       <Text selectable={true} style={styles.item}> {description} </Text>
       <Text selectable={true}> {phone} </Text>
       <Text selectable={true}> {location} </Text>

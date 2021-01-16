@@ -16,7 +16,7 @@ const GET_JOBS = gql`
     jobs(searchValue: $searchValue, skip: $skip) {
       id
       title
-      jobDate
+      created
     }
   }
 `;
@@ -82,11 +82,11 @@ export default ({ navigation }) => {
       <FlatList
         data={jobs}
         renderItem={({ item: job }) => {
-          const { title, jobDate } = job;
+          const { title, created } = job;
           return (
             <Pressable style={styles.item} onPress={() => navigation.navigate("Job", { job })}>
               <Text style={styles.header}>{title}</Text>
-              <Text style={styles.subheader}>{jobDate}</Text>
+              <Text style={styles.subheader}>{new Date(parseInt(created)).toLocaleString("ru-RU")}</Text>
             </Pressable>
           );
         }}

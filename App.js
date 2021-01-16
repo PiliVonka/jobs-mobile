@@ -52,18 +52,6 @@ export default function App () {
   if (loadingCache) {
     return <AppLoading />;
   }
-  const HeaderComp = props => {
-    console.log({ props });
-    const [searchText, setSearchText] = useState("");
-    return (
-      <SearchBar
-        inputContainerStyle={{ flex: 1, backgroundColor: "lightgray", }}
-        containerStyle={{ height: 55, flex: 1, borderBottomColor: "white", backgroundColor: "white", borderTopColor: "white" }}
-        placeholder="Программист"
-        value={searchText}
-        onChangeText={setSearchText} />
-    );
-  };
 
   const stackNavigator = () => {
     return (
@@ -71,23 +59,6 @@ export default function App () {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{
-              haha: "yes",
-              // eslint-disable-next-line react/display-name
-              headerTitle: props => {
-                console.log({ props });
-                const [searchText, setSearchText] = useState("");
-                return (
-                  <SearchBar
-                    inputContainerStyle={{ flex: 1, backgroundColor: "lightgray", }}
-                    containerStyle={{ height: 55, flex: 1, borderBottomColor: "white", backgroundColor: "white", borderTopColor: "white" }}
-                    placeholder="Программист"
-                    value={searchText}
-                    onSubmitEditing={() => console.log("Search softkey pressed!")}
-                    onChangeText={setSearchText} />
-                );
-              }
-            }}
             style={{ backgroundColor: "red" }}
           />
           <Stack.Screen

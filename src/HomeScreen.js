@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState, useLayoutEffect } from "react";
 import {
   Text,
   FlatList,
   Pressable,
   View,
+  Button
 } from "react-native";
 import { gql, useQuery, NetworkStatus } from "@apollo/client";
 import Loading from "./Loading";
 import styles from "./styles";
+import { SearchBar } from "react-native-elements";
 
 const GET_JOBS = gql`
   query GetJobs($searchValue: String!, $skip: Int) {
@@ -20,10 +22,27 @@ const GET_JOBS = gql`
 `;
 
 export default ({ navigation }) => {
+  const [searchValue, setSearchValue] = useState("");
   const { fetchMore, networkStatus, loading, error, data } = useQuery(GET_JOBS, {
-    variables: { searchValue: "", skip: 0, limit: 10 },
+    variables: { searchValue, skip: 0, limit: 10 },
     notifyOnNetworkStatusChange: true,
   });
+
+  const [searchText, setSearchText] = useState("");
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerTitle: () => (
+        <SearchBar
+          inputContainerStyle={{ flex: 1, backgroundColor: "lightgray", }}
+          containerStyle={{ height: 55, flex: 1, borderBottomColor: "white", backgroundColor: "white", borderTopColor: "white" }}
+          placeholder="Программист"
+          value={searchText}
+          onSubmitEditing={() => setSearchValue(searchText)}
+          onChangeText={setSearchText} />
+      ),
+    });
+  }, [navigation, setSearchText, searchText, setSearchValue, searchValue]);
 
   const loadingMoreJobs = networkStatus === NetworkStatus.fetchMore;
   if ((loading || loadingMoreJobs) && (!error && !data)) {
@@ -42,11 +61,10 @@ export default ({ navigation }) => {
 
   const { jobs } = data;
   const loadMoreJobs = () => {
-    console.log("Loading more jobs..");
     if (loading || loadingMoreJobs) return;
     fetchMore({
       variables: {
-        searchValue: "",
+        searchValue,
         skip: jobs.length,
         limit: 10
       },

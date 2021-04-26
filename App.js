@@ -25,7 +25,7 @@ console.log({ InMemoryCache });
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
-  uri: "http://18.134.26.248:8080/graphql",
+  uri: "https://ig9k368qhf.execute-api.eu-west-2.amazonaws.com/default/jobs-lambda",
 
   cache,
   defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
